@@ -1,0 +1,182 @@
+.quantum-panel {
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 1.25rem;
+  border: 1px solid rgba(49, 174, 255, 0.35);
+  background:
+    radial-gradient(circle at 12% 18%, rgba(28, 149, 255, 0.2), transparent 40%),
+    radial-gradient(circle at 88% 14%, rgba(0, 255, 218, 0.12), transparent 36%),
+    linear-gradient(125deg, rgba(8, 16, 30, 0.92), rgba(7, 13, 27, 0.88));
+  border-radius: 0.95rem;
+  padding: 1rem;
+  box-shadow: 0 0 28px rgba(0, 201, 255, 0.16), inset 0 0 26px rgba(34, 132, 255, 0.08);
+}
+
+.quantum-bg-orb {
+  position: absolute;
+  width: 8rem;
+  height: 8rem;
+  border-radius: 9999px;
+  filter: blur(18px);
+  pointer-events: none;
+}
+
+.quantum-bg-orb-a {
+  top: -1.4rem;
+  left: -1.2rem;
+  background: rgba(38, 198, 255, 0.14);
+}
+
+.quantum-bg-orb-b {
+  bottom: -1.8rem;
+  right: -1rem;
+  background: rgba(0, 255, 194, 0.14);
+}
+
+.quantum-headline-wrap {
+  position: relative;
+  z-index: 2;
+  margin-bottom: 0.8rem;
+}
+
+.quantum-kicker {
+  color: rgba(137, 188, 255, 0.9);
+  font-size: 0.67rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  margin-bottom: 0.32rem;
+}
+
+.quantum-stage-title {
+  color: #8befff;
+  font-size: 1.02rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+}
+
+.quantum-visual-core {
+  position: relative;
+  height: 148px;
+  border-radius: 0.75rem;
+  border: 1px solid rgba(116, 177, 255, 0.28);
+  background: linear-gradient(160deg, rgba(7, 16, 33, 0.92), rgba(3, 10, 20, 0.92));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 0.85rem;
+}
+
+.quantum-ring {
+  position: absolute;
+  border-radius: 9999px;
+  border: 1px solid rgba(96, 218, 255, 0.65);
+}
+
+.quantum-ring-outer {
+  width: 102px;
+  height: 102px;
+  box-shadow: 0 0 22px rgba(23, 193, 255, 0.22);
+}
+
+.quantum-ring-inner {
+  width: 62px;
+  height: 62px;
+  border-color: rgba(106, 255, 225, 0.75);
+  box-shadow: 0 0 20px rgba(0, 255, 229, 0.18);
+}
+
+.quantum-wave-grid {
+  position: absolute;
+  inset: 12px;
+  border-radius: 0.65rem;
+  opacity: 0.26;
+  background-image:
+    linear-gradient(rgba(75, 177, 255, 0.16) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(75, 177, 255, 0.16) 1px, transparent 1px);
+  background-size: 18px 18px;
+}
+
+.quantum-wave-grid[data-superposition='true'] {
+  animation: quantum-wave 0.95s ease-in-out infinite;
+}
+
+.quantum-collapse-digits {
+  position: relative;
+  z-index: 2;
+  color: #e2fbff;
+  font-size: 1.55rem;
+  font-weight: 700;
+  letter-spacing: 0.33rem;
+  text-shadow: 0 0 12px rgba(145, 255, 242, 0.7);
+}
+
+.quantum-stream {
+  position: relative;
+  z-index: 2;
+  color: rgba(134, 241, 255, 0.84);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
+  white-space: nowrap;
+  overflow: hidden;
+  opacity: 0.92;
+  margin-bottom: 0.75rem;
+  animation: binary-shift 3.8s linear infinite;
+}
+
+.quantum-progress-track {
+  width: 100%;
+  height: 6px;
+  border-radius: 9999px;
+  overflow: hidden;
+  background: rgba(74, 105, 164, 0.3);
+}
+
+.quantum-progress-fill {
+  height: 100%;
+  border-radius: 9999px;
+  background: linear-gradient(90deg, #39c9ff, #8bffd7);
+  box-shadow: 0 0 16px rgba(57, 201, 255, 0.55);
+}
+
+@keyframes quantum-wave {
+  0% {
+    transform: scale(1);
+    filter: blur(0px);
+    opacity: 0.22;
+  }
+  50% {
+    transform: scale(1.035);
+    filter: blur(0.7px);
+    opacity: 0.45;
+  }
+  100% {
+    transform: scale(1);
+    filter: blur(0px);
+    opacity: 0.22;
+  }
+}
+
+@keyframes binary-shift {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-22%);
+  }
+}
+
+@media (max-width: 540px) {
+  .quantum-stage-title {
+    font-size: 0.9rem;
+  }
+
+  .quantum-visual-core {
+    height: 130px;
+  }
+
+  .quantum-collapse-digits {
+    font-size: 1.15rem;
+    letter-spacing: 0.26rem;
+  }
+}
