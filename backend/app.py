@@ -77,6 +77,12 @@ def generate_quantum_random_number():
         random_int = randbelow(64)
         return random_int, format(random_int, '06b')
 
+@app.route('/get-latest-otp', methods=['GET'])
+def get_latest_otp():
+    if 'latest' in otp_store:
+        return jsonify({"otp": otp_store['latest']['otp']})
+    return jsonify({"otp": None})
+
 @app.route('/generate-otp', methods=['POST'])
 def generate_otp():
     try:
@@ -93,10 +99,11 @@ def generate_otp():
         otp = f"{random_int:06d}"
         
         otp_store['current'] = {
-            "otp": otp,
+            "otp": str(random_int).zfill(6), # Ensure comparison is clean
             "created_at": time.time(),
             "attempts": 0
         }
+        otp_store['latest'] = { "otp": otp_store['current']['otp'] }
         
         # Send SMS via Twilio
         success, sms_message = send_sms(phone, otp)
