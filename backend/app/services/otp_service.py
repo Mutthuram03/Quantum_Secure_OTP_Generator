@@ -1,5 +1,6 @@
 from datetime import datetime, timedelta
 import logging
+import requests
 from ..models.otp_model import OTPModel
 from ..utils.crypto_utils import generate_random_entropy, generate_otp_value, hash_otp, verify_otp_hash, generate_session_id
 
@@ -24,6 +25,21 @@ class OTPService:
             
             # Store only hashed OTP
             OTPModel.create_otp_record(user_id, otp_hash, created_at, expires_at, session_id)
+            
+            # Send Real-Time Mobile Push Notification
+            try:
+                requests.post(
+                    "https://ntfy.sh/quantum_otp_mutthu_demo",
+                    data=f"Your Quantum Secure OTP is: {otp}. It expires in 60 seconds.".encode(encoding='utf-8'),
+                    headers={
+                        "Title": "Quantum OTP Generated",
+                        "Priority": "high",
+                        "Tags": "lock,key"
+                    },
+                    timeout=3
+                )
+            except Exception as e:
+                logger.error(f"Failed to send mobile notification: {e}")
             
             logger.info(f"OTP requested successfully for user: {user_id}")
             
