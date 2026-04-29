@@ -12,8 +12,10 @@ const App = () => {
   const [isAttacking, setIsAttacking] = useState(false);
   const [explainMode, setExplainMode] = useState(true);
   const [verificationResult, setVerificationResult] = useState(null);
+  const [verificationMessage, setVerificationMessage] = useState('');
   const [timer, setTimer] = useState(30);
   const [securityLevel, setSecurityLevel] = useState('High');
+  const [attackDetected, setAttackDetected] = useState(false);
 
   const [isGenerating, setIsGenerating] = useState(false);
 
@@ -47,9 +49,11 @@ const App = () => {
       const res = await axios.get(`${API_BASE}/generate-key`);
       setKey(res.data.key);
       setSecurityLevel(res.data.security_level);
+      setAttackDetected(false);
       addLogs(res.data.logs);
       setOtp('');
       setVerificationResult(null);
+      setVerificationMessage('');
     } catch (err) {
       console.error(err);
     }
@@ -75,10 +79,13 @@ const App = () => {
       setIsAttacking(true);
       const res = await axios.post(`${API_BASE}/simulate-attack`);
       setSecurityLevel(res.data.security_level);
+      setAttackDetected(true);
       addLogs(res.data.logs);
       setTimeout(() => setIsAttacking(false), 2000);
     } catch (err) {
       console.error(err);
+      setIsAttacking(false);
+      addLogs([err?.response?.data?.error || "[ERROR] Attack simulation failed"]);
     }
   };
 
@@ -86,10 +93,12 @@ const App = () => {
     try {
       const res = await axios.post(`${API_BASE}/verify-otp`, { otp: userInput });
       setVerificationResult(res.data.success ? 'success' : 'failure');
+      setVerificationMessage(res.data.message || res.data.error || 'Verification completed');
       addLogs(res.data.logs || []);
     } catch (err) {
       console.error(err);
       setVerificationResult('failure');
+      setVerificationMessage(err?.response?.data?.error || 'Verification request failed');
       if (err.response && err.response.data && err.response.data.logs) {
         addLogs(err.response.data.logs);
       } else {
@@ -199,6 +208,13 @@ const App = () => {
                   <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} className="mb-8 p-4 bg-cyan-900/20 border-l-4 border-cyan-500 rounded-r text-sm text-cyan-100">
                     <strong className="text-cyan-400 block mb-1">Teacher Note: Quantum State Collapse</strong>
                     By relying on simulated quantum properties, any attempt by a malicious actor to read the key in transit collapses its state. Notice how simulating an attack changes the key and lowers the security level permanently.
+                  </motion.div>
+                )}
+
+                {attackDetected && (
+                  <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} className="mb-8 p-4 bg-red-950/40 border border-red-500/40 rounded-xl text-sm text-red-100">
+                    <strong className="text-red-300 block mb-1">Attack Mode Active</strong>
+                    This demo intentionally invalidates OTP verification after interception is detected. To recover, regenerate the key and generate a fresh OTP.
                   </motion.div>
                 )}
 
@@ -380,6 +396,16 @@ const App = () => {
                   </motion.div>
                 )}
 
+                {verificationResult && (
+                  <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} className={`mt-4 p-4 rounded-xl border text-sm ${verificationResult === 'success' ? 'bg-green-950/30 border-green-500/40 text-green-100' : 'bg-red-950/30 border-red-500/40 text-red-100'}`}>
+                    <strong className="block mb-1">Verification Response</strong>
+                    <p>{verificationMessage}</p>
+                    {attackDetected && verificationResult === 'failure' && (
+                      <p className="mt-2 text-red-200">Reason: Attack simulation sets the session as compromised, so backend rejects verification by design.</p>
+                    )}
+                  </motion.div>
+                )}
+
                 <div className="mt-8 pt-8 border-t border-slate-700">
                   <h3 className="text-xl font-bold text-slate-200 mb-6 flex items-center gap-3">
                     <span className="text-cyan-400 text-2xl">🛡️</span> Security Protocol Enforcement
@@ -411,7 +437,7 @@ const App = () => {
                   </button>
                   
                   {verificationResult && (
-                     <button onClick={() => { setCurrentStep(1); setKey(''); setOtp(''); setUserInput(''); setVerificationResult(null); }} className="px-6 py-3 bg-slate-700 hover:bg-slate-600 rounded-lg font-bold transition-all text-white border border-slate-500 shadow-lg">
+                    <button onClick={() => { setCurrentStep(1); setKey(''); setOtp(''); setUserInput(''); setVerificationResult(null); setVerificationMessage(''); setAttackDetected(false); setSecurityLevel('High'); }} className="px-6 py-3 bg-slate-700 hover:bg-slate-600 rounded-lg font-bold transition-all text-white border border-slate-500 shadow-lg">
                        Restart Entire Process ↺
                      </button>
                   )}
