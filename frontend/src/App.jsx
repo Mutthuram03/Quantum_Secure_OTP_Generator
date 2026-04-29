@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { motion, AnimatePresence } from 'framer-motion';
+import OtpViewer from './components/OtpViewer';
 
 const API_BASE = 'https://quantum-secure-otp-generator.onrender.com';
 
@@ -196,6 +197,10 @@ const App = () => {
                   Enter Quantum OTP Console
                 </button>
               </div>
+            </div>
+
+            <div className="mt-6">
+              <OtpViewer />
             </div>
           </motion.section>
         </div>
