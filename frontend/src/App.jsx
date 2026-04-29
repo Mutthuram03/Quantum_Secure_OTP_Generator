@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 const API_BASE = `http://${window.location.hostname}:5000`;
 
 const App = () => {
+  const [showHome, setShowHome] = useState(true);
   const [key, setKey] = useState('');
   const [otp, setOtp] = useState('');
   const [userInput, setUserInput] = useState('');
@@ -107,6 +108,101 @@ const App = () => {
     }
   };
 
+  if (showHome) {
+    return (
+      <div className="min-h-screen bg-slate-900 text-white p-4 md:p-8 font-mono">
+        <div className="max-w-6xl mx-auto">
+          <motion.header
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="mb-8 border-b border-slate-700 pb-6"
+          >
+            <p className="text-cyan-400 text-xs md:text-sm tracking-[0.25em] uppercase font-bold mb-3">
+              Quantum OTP Security Demo
+            </p>
+            <h1 className="text-4xl md:text-6xl font-black leading-tight bg-gradient-to-r from-cyan-300 via-cyan-400 to-blue-500 bg-clip-text text-transparent">
+              One-Time Passwords
+              <br />
+              Powered by Quantum Principles
+            </h1>
+            <p className="text-slate-300 mt-6 max-w-3xl leading-relaxed text-sm md:text-base">
+              This project demonstrates a secure OTP protocol inspired by quantum behavior. It visualizes key generation, OTP hashing, and verification, while showing how interception attempts impact trust and authorization.
+            </p>
+          </motion.header>
+
+          <motion.section
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.1 }}
+            className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 mb-8"
+          >
+            {[
+              {
+                title: 'Quantum Key Init',
+                subtitle: 'High-entropy source',
+                description: 'Bootstraps a volatile key stream that simulates quantum randomness and immediate tamper impact.'
+              },
+              {
+                title: 'OTP Hashing',
+                subtitle: 'Time-bound secret',
+                description: 'Generates a 6-digit OTP from key + time windows and stores only secure hash representations.'
+              },
+              {
+                title: 'DB Verification',
+                subtitle: 'Strict policy checks',
+                description: 'Confirms expiry, match, attempts, and replay protection before final access authorization.'
+              }
+            ].map((item, index) => (
+              <motion.article
+                key={item.title}
+                initial={{ opacity: 0, y: 14 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.15 + index * 0.1 }}
+                className="bg-slate-800/70 border border-slate-600 rounded-2xl p-5 backdrop-blur shadow-xl"
+              >
+                <p className="text-xs tracking-[0.2em] uppercase text-cyan-400 font-bold">{item.subtitle}</p>
+                <h2 className="mt-2 text-xl font-bold text-white">{item.title}</h2>
+                <p className="mt-3 text-sm text-slate-300 leading-relaxed">{item.description}</p>
+              </motion.article>
+            ))}
+          </motion.section>
+
+          <motion.section
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2 }}
+            className="bg-slate-800/50 border border-slate-700 rounded-2xl p-6 md:p-8"
+          >
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-center">
+              <div>
+                <h3 className="text-2xl font-bold text-white mb-3">What you can do in the simulation</h3>
+                <ul className="space-y-2 text-slate-300 text-sm md:text-base">
+                  <li>1. Initialize and regenerate a quantum-inspired key.</li>
+                  <li>2. Produce and observe rolling OTP windows.</li>
+                  <li>3. Simulate an interception attack and inspect security response.</li>
+                  <li>4. Verify an OTP against backend policy enforcement.</li>
+                </ul>
+              </div>
+
+              <div className="bg-black/30 border border-cyan-900/60 rounded-xl p-5">
+                <p className="text-cyan-300 text-xs uppercase tracking-[0.2em] font-bold mb-3">Launch</p>
+                <p className="text-slate-300 text-sm leading-relaxed mb-5">
+                  Start the live protocol walkthrough and move through the 3-step secure flow.
+                </p>
+                <button
+                  onClick={() => setShowHome(false)}
+                  className="w-full px-6 py-3 bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 rounded-lg font-bold transition-all shadow-lg shadow-cyan-900/50"
+                >
+                  Enter Quantum OTP Console
+                </button>
+              </div>
+            </div>
+          </motion.section>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen bg-slate-900 text-white p-4 md:p-8 font-mono">
       <header className="flex flex-col md:flex-row justify-between items-center mb-8 border-b border-slate-700 pb-4 gap-4">
@@ -121,6 +217,12 @@ const App = () => {
           </p>
         </div>
         <div className="flex items-center gap-4">
+          <button
+            onClick={() => setShowHome(true)}
+            className="px-4 py-2 rounded-lg font-semibold text-sm border border-slate-600 bg-slate-800 hover:bg-slate-700 transition"
+          >
+            Home
+          </button>
           <label className="flex items-center cursor-pointer bg-slate-800 px-4 py-2 rounded-lg border border-slate-700 hover:bg-slate-700 transition">
             <span className="mr-3 text-sm text-slate-300 font-semibold">Teacher Explainer Mode</span>
             <div className={`w-12 h-6 rounded-full p-1 transition-colors ${explainMode ? 'bg-cyan-500' : 'bg-slate-600'}`} onClick={() => setExplainMode(!explainMode)}>
