@@ -4,7 +4,7 @@ import { motion } from 'framer-motion'
 
 function OtpViewer() {
   const [currentOtp, setCurrentOtp] = useState(null)
-  const API_BASE_URL = 'http://localhost:5000'
+  const API_BASE_URL = 'https://quantum-secure-otp-generator.onrender.com'
 
   useEffect(() => {
     const fetchOtp = async () => {
