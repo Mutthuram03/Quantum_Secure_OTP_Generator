@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { motion, AnimatePresence } from 'framer-motion';
 
-const API_BASE = `http://${window.location.hostname}:5000`;
+const API_BASE = 'https://quantum-secure-otp-generator.onrender.com';
 
 const App = () => {
   const [showHome, setShowHome] = useState(true);
