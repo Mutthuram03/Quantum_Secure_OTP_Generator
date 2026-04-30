@@ -124,7 +124,7 @@ const App = () => {
               transition={{ duration: 0.8, ease: "easeOut" }}
             >
               <p className="text-cyan-400 text-xs md:text-sm tracking-[0.3em] uppercase font-bold mb-6">
-                Quantum OTP Security Demo
+                Quantum OTP Security simulation
               </p>
               <h1 className="text-5xl md:text-7xl lg:text-8xl font-black leading-tight bg-gradient-to-r from-cyan-300 via-cyan-400 to-blue-500 bg-clip-text text-transparent mb-8">
                 Next-Gen <br className="hidden md:block"/> Secure Access
