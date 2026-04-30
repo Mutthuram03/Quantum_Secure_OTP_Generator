@@ -111,99 +111,131 @@ const App = () => {
 
   if (showHome) {
     return (
-      <div className="min-h-screen bg-slate-900 text-white p-4 md:p-8 font-mono">
-        <div className="max-w-6xl mx-auto">
-          <motion.header
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="mb-8 border-b border-slate-700 pb-6"
-          >
-            <p className="text-cyan-400 text-xs md:text-sm tracking-[0.25em] uppercase font-bold mb-3">
-              Quantum OTP Security Demo
-            </p>
-            <h1 className="text-4xl md:text-6xl font-black leading-tight bg-gradient-to-r from-cyan-300 via-cyan-400 to-blue-500 bg-clip-text text-transparent">
-              One-Time Passwords
-              <br />
-              Powered by Quantum Principles
-            </h1>
-            <p className="text-slate-300 mt-6 max-w-3xl leading-relaxed text-sm md:text-base">
-              This project demonstrates a secure OTP protocol inspired by quantum behavior. It visualizes key generation, OTP hashing, and verification, while showing how interception attempts impact trust and authorization.
-            </p>
-          </motion.header>
-
-          <motion.section
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1 }}
-            className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 mb-8"
-          >
-            {[
-              {
-                title: 'Quantum Key Init',
-                subtitle: 'High-entropy source',
-                description: 'Bootstraps a volatile key stream that simulates quantum randomness and immediate tamper impact.'
-              },
-              {
-                title: 'OTP Hashing',
-                subtitle: 'Time-bound secret',
-                description: 'Generates a 6-digit OTP from key + time windows and stores only secure hash representations.'
-              },
-              {
-                title: 'DB Verification',
-                subtitle: 'Strict policy checks',
-                description: 'Confirms expiry, match, attempts, and replay protection before final access authorization.'
-              }
-            ].map((item, index) => (
-              <motion.article
-                key={item.title}
-                initial={{ opacity: 0, y: 14 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.15 + index * 0.1 }}
-                className="bg-slate-800/70 border border-slate-600 rounded-2xl p-5 backdrop-blur shadow-xl"
+      <div className="bg-slate-900 text-white font-mono overflow-x-hidden selection:bg-cyan-500/30 scroll-smooth">
+        
+        {/* HERO SECTION - Viewport 1 */}
+        <section className="min-h-screen flex flex-col items-center justify-center p-4 md:p-8 relative">
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-slate-800 via-slate-900 to-slate-900"></div>
+          
+          <div className="max-w-5xl mx-auto text-center relative z-10 w-full">
+            <motion.header
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
+            >
+              <p className="text-cyan-400 text-xs md:text-sm tracking-[0.3em] uppercase font-bold mb-6">
+                Quantum OTP Security Demo
+              </p>
+              <h1 className="text-5xl md:text-7xl lg:text-8xl font-black leading-tight bg-gradient-to-r from-cyan-300 via-cyan-400 to-blue-500 bg-clip-text text-transparent mb-8">
+                Next-Gen <br className="hidden md:block"/> Secure Access
+              </h1>
+              <p className="text-slate-300 mt-6 max-w-2xl mx-auto leading-relaxed text-base md:text-lg mb-12">
+                Experience a secure One-Time Password protocol inspired by quantum behavior. Witness key generation, cryptographic hashing, and unyielding database verification in real-time.
+              </p>
+              
+              <motion.div
+                initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.8, duration: 1 }}
+                className="animate-bounce mt-12 text-slate-500 flex flex-col items-center justify-center"
               >
-                <p className="text-xs tracking-[0.2em] uppercase text-cyan-400 font-bold">{item.subtitle}</p>
-                <h2 className="mt-2 text-xl font-bold text-white">{item.title}</h2>
-                <p className="mt-3 text-sm text-slate-300 leading-relaxed">{item.description}</p>
-              </motion.article>
-            ))}
-          </motion.section>
+                <p className="text-xs uppercase tracking-widest mb-2">Scroll to explore</p>
+                <span className="text-2xl">↓</span>
+              </motion.div>
+            </motion.header>
+          </div>
+        </section>
 
-          <motion.section
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
-            className="bg-slate-800/50 border border-slate-700 rounded-2xl p-6 md:p-8"
-          >
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-center">
-              <div>
-                <h3 className="text-2xl font-bold text-white mb-3">What you can do in the simulation</h3>
-                <ul className="space-y-2 text-slate-300 text-sm md:text-base">
-                  <li>1. Initialize and regenerate a quantum-inspired key.</li>
-                  <li>2. Produce and observe rolling OTP windows.</li>
-                  <li>3. Simulate an interception attack and inspect security response.</li>
-                  <li>4. Verify an OTP against backend policy enforcement.</li>
-                </ul>
-              </div>
-
-              <div className="bg-black/30 border border-cyan-900/60 rounded-xl p-5">
-                <p className="text-cyan-300 text-xs uppercase tracking-[0.2em] font-bold mb-3">Launch</p>
-                <p className="text-slate-300 text-sm leading-relaxed mb-5">
-                  Start the live protocol walkthrough and move through the 3-step secure flow.
-                </p>
-                <button
-                  onClick={() => setShowHome(false)}
-                  className="w-full px-6 py-3 bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 rounded-lg font-bold transition-all shadow-lg shadow-cyan-900/50"
+        {/* FEATURES SECTION - Viewport 2 */}
+        <section className="min-h-screen flex flex-col items-center justify-center p-4 md:p-8 border-t border-slate-800/50 bg-slate-900/80 relative">
+          <div className="max-w-6xl mx-auto w-full relative z-10">
+            <div className="text-center mb-16">
+               <h2 className="text-3xl md:text-5xl font-bold mb-4 text-white">Three Pillars of Security</h2>
+               <p className="text-slate-400 max-w-xl mx-auto text-lg">A robust architecture designed to thwart modern interception and replay attacks.</p>
+            </div>
+            <motion.div
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.6 }}
+              className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8"
+            >
+              {[
+                {
+                  title: 'Quantum Key Init',
+                  subtitle: 'High-entropy source',
+                  description: 'Bootstraps a volatile key stream that simulates quantum randomness and immediate tamper impact. Any observation collapses the state.',
+                  icon: '🌌'
+                },
+                {
+                  title: 'OTP Hashing',
+                  subtitle: 'Time-bound secret',
+                  description: 'Generates a 6-digit OTP from key + time windows and stores only secure hash representations, completely immune to database leaks.',
+                  icon: '🔐'
+                },
+                {
+                  title: 'DB Verification',
+                  subtitle: 'Strict policy checks',
+                  description: 'Confirms expiry, match, attempts, and replay protection before final access authorization. Zero-knowledge enforcement.',
+                  icon: '🛡️'
+                }
+              ].map((item, index) => (
+                <motion.article
+                  key={item.title}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.2 + index * 0.15 }}
+                  className="bg-slate-800/40 border border-slate-700/50 hover:border-cyan-500/50 rounded-3xl p-8 backdrop-blur shadow-xl transition-all hover:-translate-y-2 group"
                 >
-                  Enter Quantum OTP Console
-                </button>
-              </div>
-            </div>
+                  <div className="text-4xl mb-6 group-hover:scale-110 transition-transform origin-left">{item.icon}</div>
+                  <p className="text-xs tracking-[0.2em] uppercase text-cyan-400 font-bold mb-2">{item.subtitle}</p>
+                  <h3 className="text-2xl font-bold text-white mb-4">{item.title}</h3>
+                  <p className="text-sm text-slate-300 leading-relaxed">{item.description}</p>
+                </motion.article>
+              ))}
+            </motion.div>
+          </div>
+        </section>
 
-            <div className="mt-6">
-              <OtpViewer />
-            </div>
-          </motion.section>
-        </div>
+        {/* INTERACTION SECTION - Viewport 3 */}
+        <section className="min-h-screen flex flex-col items-center justify-center p-4 md:p-8 border-t border-slate-800/50 bg-slate-900 relative overflow-hidden">
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-cyan-900/10 blur-[120px] rounded-full pointer-events-none"></div>
+          
+          <div className="max-w-6xl mx-auto w-full relative z-10">
+            <motion.div
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-8 items-center"
+            >
+              <div className="order-2 lg:order-1 transform hover:scale-[1.02] transition-transform">
+                <OtpViewer />
+              </div>
+
+              <div className="order-1 lg:order-2 space-y-8">
+                <div>
+                  <h3 className="text-3xl md:text-4xl font-bold text-white mb-4">Interactive Sandbox</h3>
+                  <p className="text-slate-300 text-base md:text-lg leading-relaxed mb-6">
+                    Step into the console to test the protocol yourself. Generate a volatile key, observe the rolling OTP windows, simulate interception attacks, and execute backend database verifications.
+                  </p>
+                </div>
+
+                <div className="bg-black/40 border border-cyan-900/60 rounded-2xl p-8 shadow-2xl backdrop-blur-sm">
+                  <p className="text-cyan-400 text-xs uppercase tracking-[0.2em] font-bold mb-4 flex items-center gap-2">
+                    <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse"></span> System Ready
+                  </p>
+                  <h4 className="text-xl font-semibold text-white mb-6">Launch the Walkthrough</h4>
+                  <button
+                    onClick={() => setShowHome(false)}
+                    className="w-full px-8 py-4 bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 rounded-xl text-lg font-bold transition-all shadow-[0_0_20px_rgba(8,145,178,0.4)] hover:shadow-[0_0_30px_rgba(8,145,178,0.6)] hover:-translate-y-1 text-white"
+                  >
+                    Enter Security Console →
+                  </button>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        </section>
       </div>
     );
   }
