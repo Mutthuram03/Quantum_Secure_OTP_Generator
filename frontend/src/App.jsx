@@ -200,39 +200,50 @@ const App = () => {
         <section className="min-h-screen flex flex-col items-center justify-center p-4 md:p-8 border-t border-slate-800/50 bg-slate-900 relative overflow-hidden">
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-cyan-900/10 blur-[120px] rounded-full pointer-events-none"></div>
           
-          <div className="max-w-6xl mx-auto w-full relative z-10">
+          <div className="max-w-4xl mx-auto w-full relative z-10 space-y-12 text-center">
             <motion.div
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
-              className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-8 items-center"
+              className="space-y-6"
             >
-              <div className="order-2 lg:order-1 transform hover:scale-[1.02] transition-transform">
-                <OtpViewer />
-              </div>
+              <h3 className="text-4xl md:text-5xl font-black text-white mb-4 tracking-tight">Interactive Sandbox</h3>
+              <p className="text-slate-300 text-lg md:text-xl leading-relaxed max-w-2xl mx-auto">
+                Step into the console to test the protocol yourself. Generate a volatile key, observe the rolling OTP windows, simulate interception attacks, and execute backend database verifications.
+              </p>
+            </motion.div>
 
-              <div className="order-1 lg:order-2 space-y-8">
-                <div>
-                  <h3 className="text-3xl md:text-4xl font-bold text-white mb-4">Interactive Sandbox</h3>
-                  <p className="text-slate-300 text-base md:text-lg leading-relaxed mb-6">
-                    Step into the console to test the protocol yourself. Generate a volatile key, observe the rolling OTP windows, simulate interception attacks, and execute backend database verifications.
-                  </p>
-                </div>
+            <motion.div
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="transform hover:scale-[1.02] transition-transform duration-500 w-full"
+            >
+              <OtpViewer />
+            </motion.div>
 
-                <div className="bg-black/40 border border-cyan-900/60 rounded-2xl p-8 shadow-2xl backdrop-blur-sm">
-                  <p className="text-cyan-400 text-xs uppercase tracking-[0.2em] font-bold mb-4 flex items-center gap-2">
-                    <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse"></span> System Ready
-                  </p>
-                  <h4 className="text-xl font-semibold text-white mb-6">Launch the Walkthrough</h4>
-                  <button
-                    onClick={() => setShowHome(false)}
-                    className="w-full px-8 py-4 bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 rounded-xl text-lg font-bold transition-all shadow-[0_0_20px_rgba(8,145,178,0.4)] hover:shadow-[0_0_30px_rgba(8,145,178,0.6)] hover:-translate-y-1 text-white"
-                  >
-                    Enter Security Console →
-                  </button>
-                </div>
+            <motion.div
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+              className="bg-black/40 border border-cyan-900/60 rounded-3xl p-8 md:p-12 shadow-2xl backdrop-blur-md w-full"
+            >
+              <div className="flex justify-center mb-6">
+                <span className="flex items-center gap-2 px-4 py-2 bg-cyan-950/50 rounded-full border border-cyan-800">
+                  <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse"></span>
+                  <span className="text-cyan-400 text-xs uppercase tracking-[0.2em] font-bold">System Ready</span>
+                </span>
               </div>
+              <h4 className="text-2xl md:text-3xl font-bold text-white mb-8">Launch the Walkthrough</h4>
+              <button
+                onClick={() => setShowHome(false)}
+                className="w-full md:w-2/3 mx-auto block px-8 py-5 bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 rounded-2xl text-xl font-black tracking-wide transition-all shadow-[0_0_30px_rgba(8,145,178,0.4)] hover:shadow-[0_0_50px_rgba(8,145,178,0.6)] hover:-translate-y-1 text-white"
+              >
+                Enter Security Console →
+              </button>
             </motion.div>
           </div>
         </section>
